@@ -61,9 +61,34 @@ sys.float_info(max=1.7976931348623157e+308, max_exp=1024, max_10_exp=308, min=2.
 
 ## 可迭代类型
 
-自定义类的话, 要实现 `__iter__()` 才是可迭代的.
+容器类的话, 要实现 `__iter__()` 才是可迭代的.
 
 满足 `__iter__()` 和 `__next__()` 的, 就是可迭代类型.
 
-- iterator.`__iter__()`
-- iterator.`__next__()`
+- iterator.`__iter__()` 返回迭代器自己, 如果没定义的话, 解释器会退阶找 `__getitem__`.
+- iterator.`__next__()` 返回下一个元素, 内置函数 `next()` 也是调这个.
+
+p.s. 一个 `__next__()` 如果报 `StopIteration` 异常了, 后续就要一直报异常, 不能后面改掉.
+
+## 生成器类型
+
+(详见 yield)
+
+## 序列 list, tuple, range
+
+- 常见操作: in, not in, +, *, 切片, len(), max(), min(), .index(x[, i[, j]]), .count(x)
+- 注意 `*` 的坑: `[[]]*3` 得到的是 3 个指向同一地址的 []
+
+## 不可变序列
+
+tuple, 字典的键值, set, frozenset
+
+## 可变序列
+
+自己定义可变序列的话, 建议从 `collections.abc.MutableSequence` 拓展
+
+可用的操作:
+
+- 切片 [i], [i:j], [i:j:k]
+- del s[i:j] 相当于 s[i:j] = []
+- append(x), clear(), copy() (浅拷贝), extend(t), insert(i, x), pop(), pop(i), remove(x), reverse()
