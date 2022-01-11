@@ -92,3 +92,130 @@ tuple, 字典的键值, set, frozenset
 - 切片 [i], [i:j], [i:j:k]
 - del s[i:j] 相当于 s[i:j] = []
 - append(x), clear(), copy() (浅拷贝), extend(t), insert(i, x), pop(), pop(i), remove(x), reverse()
+
+## list
+
+可用的方法有:
+
+- sort(*, key=None, reverse=False)
+
+## tuple
+
+怎么造一个
+
+- 用括号 ()
+- 单个的, 后面加个逗号: `a,` 或者 `(a,)`
+- 多个, 逗号分隔: `a,b,c` 或者 `(a,b,c)`
+- 用 tuple() 强制
+
+参考: collections.namedtuple() 可用用名来访问
+
+## range(stop), range(start, stop[, step])
+
+## str
+
+构成:
+
+- 单引号 `'blabla'`
+- 双引号 `"blabla"`
+- 三引号 `'''hi'''`, `"""there"""`
+
+一行中,中间有空白的引号可用自动拼装: `('a' 'b') == 'ab'`
+
+可用方法:
+
+- str.capitalize() 首字母大写
+- str.casefold() 很激进的大写转小写, 特殊字符会被替代
+- str.center(width[, fillchar]) 文字居中, 并用 fillchar 填充, 不指定就是空格填充
+- str.count(sub[, start[, end]]) 在 [start, end] 区间里找 sub 的个数, 区域不重叠!
+- str.encode(encoding='utf-8', errors='strict')  errors = ['strict', 'ignore', 'replace', 'xmlcharrefreplace', 'backslashreplace'] 编码方式很多, 见标准编码
+- str.endswith(suffix[, start[, end]]) 以 suffix 结束. suffix 可用是 tuple, 一次性比较多个. 如果有 [start, end] 则只比较该区域内
+- str.expandtabs(tabsize=8) `\t` 换成空格
+- str.find(sub[, start[, end]]) 看看能不能在 `s[start:end]` 切片内找到 sub
+- str.format(*args, **kwargs)
+- str.format_map(mapping) 和 str.format(**mapping) 一样的
+- str.index(sub[,start[, end]])
+- str.isalnum() 是 isalpha, isdecimal, isdigit, isnumeric 之一
+- str.isalpha()
+- str.isascii()
+- str.isdecimal() 是十进制的数字
+- str.isdigit() 一些各种不同语言的数字也算, 哪怕不是十进制
+- str.isidentifier() 判断标识符. 判断 keyword 的话, 用 keyword.iskeyword() 来测.
+- str.islower()
+- str.isnumeric() 中文的 万, 壹 也算
+- str.isprintalbe()
+- str.isspace()
+- str.istitle()
+- str.isupper()
+- str.join(iterable)
+- ljust lower lstrip maketrans partition removeprefix removesuffix replace rfind rindex rjust rpartition rsplit rstrip split splitlines startswith strip swapcase title translate upper zfill
+
+f-string
+
+## 二进制序列 bytes, bytearray, memoryview
+
+memoryview 用 buffer 协议原地操作 bytes, bytearray, 不需要新生成 copy
+
+### bytes([source[, encoding[, errors]]])
+
+- bytes.fromhex(string) 把 '2Ef0 F1f2' 这样的字符串转成 b'.\xf0\xf1\xf2'
+- bytes.hex([sep[, bytes_per_sep]]) 把 b'\xf0\xf1\xf2'.hex() 转成 'f0f1f2'
+
+### bytearray([source[, encoding[, errors]]])
+
+也有 fromhex(), hex()
+
+### bytes, bytearray 通用操作
+
+- .count()
+- .removeprefix
+- .removesuffix
+- .decode
+- .endswith
+- .find
+- .index
+- .join
+- .maketrans
+- .partition
+- .replace
+- .rfind
+- .rindex
+- .rpartition
+- .startswith
+- .translate
+- .center
+- .ljust
+- .lstrip
+- .rjust
+- .rsplit
+- .rstrip
+- .split
+- .captialize
+- .expandtabs
+- string 的东西都有
+
+### memoryview
+
+可用的方法
+
+- `__eq__` 比较形状, 内容是否一致
+- tobytes
+- hex
+- tolist
+- toreadonly 返回一个只读copy 原来的就可以随便改了
+- release !!
+- cast(format[, shape]) 修改格式/形状!
+- obj
+- nbytes
+- readonly
+- format
+- itemsize
+- ndim
+- shape
+- strides
+- suboffsets
+- c_contiguous
+- f_contiguous
+- contiguous
+
+## set, frozenset
